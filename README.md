@@ -1,8 +1,9 @@
 # 聆心 · Lingxin
 
-> 基于 HarmonyOS Audio Kit 的实时监听（耳返）Demo：麦克风声音实时送到耳机，附带降噪、录音、波形可视化和蓝牙心率广播接收。
+> 基于 HarmonyOS Audio Kit 的实时监听（耳返）Demo：麦克风声音实时送到耳机，附带录音、波形可视化和蓝牙心率广播接收。
 >
 > 经测试无线设备free clip 2完美支持
+> 
 > 本项目由 AI 协助开发，如有问题请联系3289604653@qq.com
 >
 <p align="center">
