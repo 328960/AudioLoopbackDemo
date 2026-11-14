@@ -1,0 +1,48 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#0E0E10"
+    },
+    {
+      "name": "bg",
+      "value": "#0E0E10"
+    },
+    {
+      "name": "card",
+      "value": "#1A1A1D"
+    },
+    {
+      "name": "chip",
+      "value": "#2C2C2E"
+    },
+    {
+      "name": "text_main",
+      "value": "#F2F2F7"
+    },
+    {
+      "name": "text_sub",
+      "value": "#9A9AA0"
+    },
+    {
+      "name": "accent",
+      "value": "#2F7CF6"
+    },
+    {
+      "name": "ok",
+      "value": "#32D74B"
+    },
+    {
+      "name": "warn",
+      "value": "#FFD60A"
+    },
+    {
+      "name": "bad",
+      "value": "#FF453A"
+    },
+    {
+      "name": "divider",
+      "value": "#2A2A2D"
+    }
+  ]
+}

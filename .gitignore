@@ -1,0 +1,26 @@
+/node_modules
+/oh_modules
+/local.properties
+/.idea
+/.idea.bak
+**/build
+/.hvigor
+.cxx
+/.clangd
+/.clang-tidy
+/.clang-format
+**/.test
+/.appanalyzer
+
+# 构建产物（含签名，不要提交）
+/dist
+*.hap
+*.app
+
+# 本地签名配置（密钥、证书、密码密文）
+build-profile.local.json5
+*.p12
+*.p7b
+*.cer
+*.csr
+*.keystore

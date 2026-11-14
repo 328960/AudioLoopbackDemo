@@ -1,0 +1,60 @@
+{
+  "app": {
+    /*
+     * 签名配置说明
+     * ------------------------------------------------------------------
+     * 本仓库不包含任何签名证书与密码。
+     *
+     * 本地构建前，请在 DevEco Studio 里配置一次签名：
+     *   File → Project Structure → Signing Configs
+     *   - Store File：你的 .p12 密钥库
+     *   - Key Alias / 密码
+     *   - Profile File：AGC 签发的 .p7b
+     *   - Certpath File：AGC 签发的 .cer
+     *
+     * 配置完成后 IDE 会自动把加密后的密码写回本文件，
+     * 那份配置只留在你本机，不要提交。
+     *
+     * 只想编译不签名（产物为 unsigned，无法安装）时，
+     * 保持 signingConfigs 为空即可。
+     * ------------------------------------------------------------------
+     */
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "compatibleSdkVersion": "6.0.0(20)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        },
+        "targetSdkVersion": "6.0.0(20)"
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

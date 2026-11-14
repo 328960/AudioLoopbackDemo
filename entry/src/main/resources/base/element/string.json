@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "聆心 · Audio Kit 实时监听演示"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "聆心 监听主界面"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "聆心"
+    },
+    {
+      "name": "mic_reason",
+      "value": "用于采集麦克风声音并实时送到耳机，实现监听效果"
+    },
+    {
+      "name": "bluetooth_reason",
+      "value": "用于扫描并解析周边蓝牙设备广播的心率数据"
+    },
+    {
+      "name": "location_reason",
+      "value": "蓝牙扫描需要位置权限才能获取周边设备"
+    }
+  ]
+}
