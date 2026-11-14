@@ -60,8 +60,36 @@ if (-not $OutFile) {
     $OutFile = Join-Path $ProjectRoot 'dist\lingxin-release-signed.hap'
 }
 
-$signTool = 'E:\DevEco Studio\sdk\default\openharmony\toolchains\lib\hap-sign-tool.jar'
-$java = 'E:\DevEco Studio\jbr\bin\java.exe'
+function Find-DevEco {
+    # 1) 显式指定 IDE 根目录
+    if ($env:DEVECO_HOME -and (Test-Path (Join-Path $env:DEVECO_HOME 'jbr\bin\java.exe'))) {
+        return $env:DEVECO_HOME
+    }
+    # 2) 从 SDK 路径反推（SDK 位于 <ide>\sdk）
+    if ($env:DEVECO_SDK_HOME) {
+        $parent = Split-Path $env:DEVECO_SDK_HOME -Parent
+        if ($parent -and (Test-Path (Join-Path $parent 'jbr\bin\java.exe'))) {
+            return $parent
+        }
+    }
+    # 3) 常见安装位置
+    $candidates = @(
+        'E:\DevEco Studio',
+        'D:\DevEco Studio',
+        'C:\Program Files\Huawei\DevEco Studio',
+        (Join-Path $env:LOCALAPPDATA 'Huawei\DevEcoStudio')
+    )
+    foreach ($c in $candidates) {
+        if (Test-Path (Join-Path $c 'jbr\bin\java.exe')) {
+            return $c
+        }
+    }
+    throw 'DevEco Studio 未找到。请设置环境变量后重试：setx DEVECO_HOME "E:\DevEco Studio"  或  setx DEVECO_SDK_HOME "E:\DevEco Studio\sdk"'
+}
+
+$deveco = Find-DevEco
+$signTool = Join-Path $deveco 'sdk\default\openharmony\toolchains\lib\hap-sign-tool.jar'
+$java = Join-Path $deveco 'jbr\bin\java.exe'
 if (-not (Test-Path $signTool)) { throw "找不到 hap-sign-tool.jar: $signTool" }
 if (-not (Test-Path $java)) { throw "找不到 java: $java" }
 

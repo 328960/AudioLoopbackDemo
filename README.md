@@ -54,24 +54,43 @@ cd lingxin-audio
 
 ### 命令行构建
 
-```bash
-# HAP（单模块安装包，可用于本地安装）
-node node_modules/@ohos/hvigor/bin/hvigor.js \
-  --mode module -p product=default -p module=entry@default \
-  -p buildMode=release assembleHap --no-daemon
+脚本会自动定位 DevEco Studio，顺序是：
 
-# APP（应用市场分发需要的聚合包）
-node node_modules/@ohos/hvigor/bin/hvigor.js \
-  -p product=default -p buildMode=release assembleApp --no-daemon
+1. `DEVECO_HOME` 环境变量
+2. 从 `DEVECO_SDK_HOME` 反推父目录
+3. 常见安装位置（`E:\DevEco Studio`、`D:\DevEco Studio`、`C:\Program Files\Huawei\DevEco Studio`）
+
+装在其他盘的话，先设一次环境变量：
+
+```powershell
+setx DEVECO_HOME "D:\Your\DevEco Studio"
+# 或者
+setx DEVECO_SDK_HOME "D:\Your\DevEco Studio\sdk"
 ```
 
-> 命令行构建需要设置 `DEVECO_SDK_HOME` 指向 SDK 目录，例如：
-> `set DEVECO_SDK_HOME=E:\DevEco Studio\sdk`
+设置后**重新打开终端**，然后：
+
+```powershell
+# HAP（单模块安装包，可用于本地安装）
+.\build.ps1
+
+# 或者 release 模式
+.\build.ps1 -BuildMode release
+```
+
+脚本会依次尝试项目内 `node_modules/@ohos/hvigor`、`hvigorw.bat`，并把 JDK 加进 PATH（打包步骤需要 java）。
 
 安装到设备：
 
-```bash
-hdc install -r entry/build/default/outputs/default/entry-default-signed.hap
+```powershell
+hdc install -r entry\build\default\outputs\default\entry-default-signed.hap
+```
+
+若需要应用市场分发的 `.app` 聚合包：
+
+```powershell
+node node_modules\@ohos\hvigor\bin\hvigor.js `
+  -p product=default -p buildMode=release assembleApp --no-daemon
 ```
 
 ## 技术实现

@@ -1,4 +1,4 @@
-<#
+﻿<#
     Build the AudioLoopback demo HAP (Windows / PowerShell).
 
     Usage:
@@ -25,6 +25,18 @@ $ProjectRoot = $PSScriptRoot
 Set-Location $ProjectRoot
 
 function Find-DevEco {
+    # 1) 显式指定 IDE 根目录
+    if ($env:DEVECO_HOME -and (Test-Path (Join-Path $env:DEVECO_HOME 'tools\node\node.exe'))) {
+        return $env:DEVECO_HOME
+    }
+    # 2) 从 SDK 路径反推（SDK 位于 <ide>\sdk）
+    if ($env:DEVECO_SDK_HOME) {
+        $parent = Split-Path $env:DEVECO_SDK_HOME -Parent
+        if ($parent -and (Test-Path (Join-Path $parent 'tools\node\node.exe'))) {
+            return $parent
+        }
+    }
+    # 3) 常见安装位置
     $candidates = @(
         'E:\DevEco Studio',
         'D:\DevEco Studio',
@@ -36,7 +48,7 @@ function Find-DevEco {
             return $c
         }
     }
-    throw 'DevEco Studio not found. Edit the candidate list in Find-DevEco.'
+    throw 'DevEco Studio 未找到。请设置环境变量后重试：setx DEVECO_HOME "E:\DevEco Studio"  或  setx DEVECO_SDK_HOME "E:\DevEco Studio\sdk"'
 }
 
 $deveco = Find-DevEco
