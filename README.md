@@ -2,7 +2,7 @@
 
 > 基于 HarmonyOS Audio Kit 的实时监听（耳返）Demo：麦克风声音实时送到耳机，附带降噪、录音、波形可视化和蓝牙心率广播接收。
 >
-> 本项目由 AI 协助开发。
+> 本项目由 AI 协助开发，如有问题请联系3289604653@qq.com
 
 <p align="center">
   <img src="docs/screens/01-light-wave.jpg" width="30%" alt="浅色主题 + 波形" />
@@ -88,12 +88,6 @@ setx DEVECO_SDK_HOME "D:\Your\DevEco Studio\sdk"
 hdc install -r entry\build\default\outputs\default\entry-default-signed.hap
 ```
 
-若需要应用市场分发的 `.app` 聚合包：
-
-```powershell
-node node_modules\@ohos\hvigor\bin\hvigor.js `
-  -p product=default -p buildMode=release assembleApp --no-daemon
-```
 
 ## 技术实现
 
@@ -123,16 +117,7 @@ capturer.on('readData', (buffer) => {
 
 因为 PCM 经过应用层，所以波形、降噪、录制都挂在这条链路上。
 
-#### 波形性能：环形缓冲
 
-波形点用环形缓冲维护，避免 `shift()` 每帧搬移整个数组：
-
-```ts
-this.waveRing[this.waveWrite] = value;
-this.waveWrite = (this.waveWrite + 1) % WAVE_HISTORY;
-```
-
-并且波形数据不放入 `@State`，否则每秒几十次刷新会触发整页重渲染。
 
 ### 心率广播
 
