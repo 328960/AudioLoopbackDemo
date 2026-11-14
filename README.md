@@ -33,8 +33,8 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/<your-name>/lingxin-audio.git
-cd lingxin-audio
+git clone https://github.com/328960/AudioLoopbackDemo.git
+cd AudioLoopbackDemo
 ```
 
 用 DevEco Studio 打开工程根目录，等待 hvigor 同步完成。
